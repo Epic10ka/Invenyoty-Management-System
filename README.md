@@ -21,19 +21,23 @@
 
 ## About
 
-This project was developed to practice my coding skills, logic and knowledge of POO in Python and my first time using SQL to save data.
+This project is an inventory management system developed in Python as a practical exercise to improve my programming skills, logical thinking, and understanding of Object-Oriented Programming (OOP).
 
+It also represents my first project using a relational database for data persistence. Instead of relying on JSON or other file-based storage, the application uses SQLite to store and manage inventory data, allowing items to be created, edited, listed, and deleted while keeping the information available between application sessions.
+
+The project was designed as a command-line application with a menu-driven interface, input validation, exception handling, modularization, and multi-language support. Its main goal was to put fundamental Python concepts into practice while taking a first step toward working with databases and persistent application data.
 
 ## Concepts Applied
 
-* Object-Oriented-Programming (OOP)
+* Object-Oriented Programming (OOP)
 * Modularization
 * Exception handling
-* File saving (SQL Data Base)
 * Input validation
 * Loops and functions
-* Menu-Driven Interface
+* Menu-driven interface
 * Data encapsulation
+* Database persistence with SQLite
+* CRUD operations
 
 
 ## Features
