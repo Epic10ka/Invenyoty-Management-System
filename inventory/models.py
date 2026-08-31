@@ -1,21 +1,11 @@
-from language import language
+from inventory.language import language
+from inventory.functions import corrigir_texto
 
-
-#VALIDATING TEXT ACCCENTS Ê and Ì for PTBR "Available" and "Conferência"
-def corrigir_texto(texto):
-
-    if texto.upper() == 'DISPONIVEL':
-        return 'DISPONÍVEL'
-
-    elif texto.upper() == 'CONFERENCIA':
-        return 'CONFERÊNCIA'
-
-    return texto
 
 
 class Item:
 
-    def __init__(self, name:str, idn:int, batch:str, status:str, lang = 'ptbr'):
+    def __init__(self, name:str, idn:str, batch:str, status:str):
 
         """
         :param name: Product/Item name
@@ -28,11 +18,10 @@ class Item:
         self._idn = idn
         self._batch = batch
         self.__status = status
-        self.lang = lang
 
-    # -RETURNING A MORE VISIBLE CLASS ATTRIBUTES
+    # -RETURNING A MORE READABLE __str__ REPRESENTATION
     def __str__(self):
-        return f'--------------------------\nITEM: {self._name}\nID NUMBER: {self._idn}\nBATCH: {self._batch}\nSATUS: {self.__status}\n--------------------------'
+        return f'--------------------------\nITEM: {self._name}\nID NUMBER: {self._idn}\nBATCH: {self._batch}\nSTATUS: {self.__status}\n--------------------------'
 
 
     # -GETTERS AND SETTERS
@@ -89,7 +78,8 @@ class Item:
 
         new_status = corrigir_texto(new_status)
 
-        print(new_status)
+
+        #CHECKING IF USER IS SETTING A SYSTEM STATUS, IN EACH LANGUAGE.
 
         if new_status not in (language[self.lang]['AVAILABLE'], language[self.lang]['BLOCKED'], language[self.lang]['CHECKING'], 'HOLD'):
 
@@ -103,7 +93,18 @@ class Item:
 
 
 
-testing = Item('Whey Protein Powder', 2468, 'CC059265A', 'AVAILABLE')
 
+    #Turning attributes into a dictionary
+    def to_dict(self):
 
-print(testing)
+        """
+        Turns the vehicle save into a dictionary to make it savable in JSON
+        """
+
+        return {
+
+            'item_name': self._name,
+            'item_id': self._idn,
+            'item_batch': self._batch,
+            'item_status': self.__status,
+        }
