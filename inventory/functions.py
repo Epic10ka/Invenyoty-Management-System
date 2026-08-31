@@ -73,16 +73,69 @@ def item_creation(lang, item):
 
 def item_listing(lang):
 
-    sleep(0.2)
     rows = get_all_items()
 
     if not rows:
         print(language[lang]['NO_REGISTERED_ITEM'])
+        sleep(1)
         return
 
+    sleep(0.2)
     for row in rows:
         sleep(0.2)
         print(f'\nID: {row['idn']} | {language[lang]['NAME']}: {row['name']} | {language[lang]['ITEM_STATUS']}: {row['status']}')
+
+
+def item_deleting(lang, item):
+    while True:
+        sleep(0.2)
+
+        item_listing(lang)
+
+        rows = get_all_items()
+
+        if not rows:
+            print(language[lang]['NO_REGISTERED_ITEM'])
+            return
+
+        print(Panel.fit(language[lang]['ITEM_DELETING']))
+
+        term = input(f'{language[lang]["SEARCH_ITEM_BY_ID"]}: ').strip()
+
+        if term == '':
+            break
+
+        results = search_items(term)
+
+        if not results:
+            print(language[lang]['ITEM_NOT_FOUND'])
+            continue
+
+        if len(results) == 1:
+            row = results[0]
+
+        else:
+            for r in results:
+                print(
+                    f'ID: {r["idn"]} | {language[lang]["NAME"]}: {r["name"]} | {language[lang]["ITEM_STATUS"]}: {r["status"]}')
+
+            chosen_idn: str = input(f'{language[lang]["ITEM_DELETING"]}: ').strip()
+
+            if chosen_idn == '':
+                continue
+
+            row = get_item_by_id(chosen_idn)
+
+            if row is None:
+                print(language[lang]['ITEM_NOT_FOUND'])
+                return
+
+        delete_item(row['idn'])
+        sleep(0.6)
+        print(language[lang]['SUCCESSFUL_DELETE'])
+        sleep(1)
+
+        break
 
 
 def item_editing(lang, item):
@@ -95,8 +148,7 @@ def item_editing(lang, item):
         rows = get_all_items()
 
         if not rows:
-            print(language[lang]['NO_REGISTERED_ITEM'])
-            return
+            break
 
         print(Panel.fit(language[lang]['ITEM_EDITING']))
 

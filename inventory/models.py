@@ -70,21 +70,3 @@ class Item:
 
         else:
             self.__status = new_status
-
-
-
-
-    #Turning attributes into a dictionary
-    def to_dict(self):
-
-        """
-        Turns the vehicle save into a dictionary to make it savable in JSON
-        """
-
-        return {
-
-            'item_name': self._name,
-            'item_id': self._idn,
-            'item_batch': self._batch,
-            'item_status': self.__status,
-        }
