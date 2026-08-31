@@ -2,6 +2,7 @@ from inventory.language import language
 from rich.panel import Panel
 from rich import print
 import uuid
+from time import sleep
 from inventory.data_base import *
 
 
@@ -26,9 +27,12 @@ def item_creation(lang, item):
 
     while True:
 
+        sleep(0.2)
         print(Panel.fit(language[lang]['ITEM_CREATION']))
 
-        item_name = input(f'{language[lang]['ITEM_NAME']}: ').strip().title()
+        item_name = input(f'\n{language[lang]['ITEM_NAME']}: ').strip().title()
+        print()
+
         if item_name == '':
             break
 
@@ -71,6 +75,7 @@ def item_creation(lang, item):
 
 def item_listing(lang):
 
+    sleep(0.2)
     rows = get_all_items()
 
     if not rows:
@@ -78,27 +83,57 @@ def item_listing(lang):
         return
 
     for row in rows:
-        print(f'ID: {row['idn']} | {language[lang]['NAME']}: {row['name']} | {language[lang]['ITEM_STATUS']}: {row['status']}')
+        sleep(0.2)
+        print(f'\nID: {row['idn']} | {language[lang]['NAME']}: {row['name']} | {language[lang]['ITEM_STATUS']}: {row['status']}')
 
 
 def item_editing(lang, item):
 
     while True:
-
-        print(Panel.fit(language[lang]['ITEM_EDITING']))
+        sleep(0.2)
 
         item_listing(lang)
 
-        idn = input(f'{language[lang]['ID_EDITING']}: ')
+        rows = get_all_items()
 
-        if idn == '':
+        if not rows:
+            print(language[lang]['NO_REGISTERED_ITEM'])
+            return
+
+        print(Panel.fit(language[lang]['ITEM_EDITING']))
+
+        term = input(f'{language[lang]["SEARCH_ITEM_BY_ID"]}: ').strip()
+
+        if term == '':
             break
 
-        row = get_item_by_id(idn)
+        results = search_items(term)
 
-        if row is None:
+        if not results:
+
             print(language[lang]['ITEM_NOT_FOUND'])
-            return
+            continue
+
+        if len(results) == 1:
+
+            row = results[0]
+
+        else:
+            
+            for r in results:
+                print(
+                    f'ID: {r["idn"]} | {language[lang]["NAME"]}: {r["name"]} | {language[lang]["ITEM_STATUS"]}: {r["status"]}')
+
+            chosen_idn: str = input(f'{language[lang]["ID_EDITING"]}: ').strip()
+
+            if chosen_idn == '':
+                continue
+
+            row = get_item_by_id(chosen_idn)
+
+            if row is None:
+                print(language[lang]['ITEM_NOT_FOUND'])
+                return
 
         current_item = item(
             name = row['name'],
@@ -112,16 +147,28 @@ def item_editing(lang, item):
         new_name = input(f'{language[lang]['NEW_NAME']}: ').strip()
         if new_name:
 
-            current_item.name = new_name
+            current_item.name = new_name.title()
 
         new_batch = input(f'{language[lang]['NEW_BATCH']}: ').strip()
         if new_batch:
 
-            current_item.batch = new_name
+            current_item.batch = new_batch.upper()
 
-        new_status = input(f'{language[lang]['NEW_STATUS']}: ').strip()
-        if new_status:
-            current_item.status = new_status
+        while True:
+            new_status = input(f'\n{language[lang]["NEW_STATUS"]}: ').strip()
+            print()
+
+            if new_status:
+
+                try:
+                    current_item.status = new_status
+                    break
+
+                except ValueError as e:
+                    print(str(e))  #Forcing conversion to string before passing through print
+
+            else:
+                break
 
         update_item(current_item)
         print(language[lang]['SUCCESSFUL_UPDATE'])
@@ -134,7 +181,7 @@ def validate_option(lang, *options):
         option = input('> ').strip().upper()
 
         if option == '':
-            break
+            return ''
 
         if not option:
             print(f'{language[lang]['INVALID_OPTION']}')

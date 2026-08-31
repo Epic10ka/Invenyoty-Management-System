@@ -1,29 +1,45 @@
 from inventory.imports import *
-from inventory.language import language
 
 create_table()
 
 def main(lang):
 
-    print(Panel.fit(f'[1] {language[lang]['CREATE_ITEM']}\n[2] {language[lang]['EDIT_ITEM']}\n[3] {language[lang]['LIST_ITEMS']}\n\n  [4] {language[lang]['HELP']}', title = language[lang]['MAIN_MENU']))
+    while True:
 
-    option = validate_option(lang, '1', '2', '3', '4')
+        print()
+        print(Panel.fit(f'[1] {language[lang]['CREATE_ITEM']}\n[2] {language[lang]['EDIT_ITEM']}\n[3] {language[lang]['LIST_ITEMS']}\n\n  [4] {language[lang]['HELP']}', title = language[lang]['MAIN_MENU']))
 
-    match option:
+        option = validate_option(lang, '1', '2', '3', '4')
+        if option == '':
+            break
 
-        case '1':
-            item_creation(lang, Item)
+        match option:
 
-        case '2':
-            pass
+            case '1':
+                item_creation(lang, Item)
 
-        case '3':
-            pass
+            case '2':
+                item_editing(lang, Item)
 
-        case '4':
-            pass
+            case '3':
+                item_listing(lang)
+                input('> ')
+                sleep(0.2)
 
+            case '4':
+
+                while True:
+                    print(Panel(f'- {language[lang]['BLANK_ENTER']}\n\n- {language[lang]['AUTO_SAVING']}', title = f'[blue]{language[lang]['HELP_MENU']}[/]', width = 50))
+                    input('> ')
+                    sleep(0.4)
+                    print('\n\n\n\n\n\n\n\n\n')
+                    break
 
 
 if __name__ == '__main__':
-    main('ptbr')
+
+    while True:
+
+        main('ptbr')
+
+        break

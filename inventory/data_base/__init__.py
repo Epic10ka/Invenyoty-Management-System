@@ -58,3 +58,13 @@ def update_item(item):
 def delete_item(idn):
     with get_connection() as conn:
         conn.execute("DELETE FROM items WHERE idn = ?", (idn,))
+
+
+def search_items(termo):
+    with get_connection() as conn:
+        termo_like = f"%{termo}%"
+        rows = conn.execute(
+            "SELECT * FROM items WHERE name LIKE ? OR idn LIKE ? OR batch LIKE ?",
+            (termo_like, termo_like, termo_like)
+        ).fetchall()
+        return rows

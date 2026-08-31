@@ -1,10 +1,12 @@
 from inventory.language import language
 from inventory.functions import corrigir_texto
+from rich import print
 
 
 
 class Item:
-
+    lang = 'ptbr'
+    
     def __init__(self, name:str, idn:str, batch:str, status:str):
 
         """
@@ -34,27 +36,12 @@ class Item:
     @name.setter
     def name(self, new_name):
 
-        print(f'{language[self.lang]['NAME_SUCCESSFUL_CHANGE']}')
         self._name = new_name.strip().upper()
 
 
     @property
     def id_number(self):
         return self._idn
-
-
-    @id_number.setter
-    def id_number(self, new_number):
-
-        try:
-            new_number = int(new_number)
-            print(f'{language[self.lang]['ID_SUCCESSFUL_CHANGE']}')
-            self._idn = new_number
-
-
-        except ValueError as e:
-            print(f'{language[self.lang]['INVALID_NUMBER']} | {e}')
-
 
     @property
     def batch(self):
@@ -63,9 +50,7 @@ class Item:
 
     @batch.setter
     def batch(self, new_batch):
-
-        print(f'{language[self.lang]['BATCH_SUCCESSFUL_CHANGE']}')
-        self._batch = new_batch
+        self._batch = new_batch.upper()
 
 
     @property
@@ -80,15 +65,11 @@ class Item:
 
 
         #CHECKING IF USER IS SETTING A SYSTEM STATUS, IN EACH LANGUAGE.
-
         if new_status not in (language[self.lang]['AVAILABLE'], language[self.lang]['BLOCKED'], language[self.lang]['CHECKING'], 'HOLD'):
 
-            print(f'{language[self.lang]['INVALID_STATUS']} [{language[self.lang]['ALL_STATUS']}]')
-
+            raise ValueError(f'{language[self.lang]['INVALID_STATUS']} {language[self.lang]['ALL_STATUS']}')
 
         else:
-
-            print(f'{language[self.lang]['STATUS_SUCCESSFUL_CHANGE']}')
             self.__status = new_status
 
 

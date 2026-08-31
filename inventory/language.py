@@ -1,8 +1,8 @@
-white = '\033[1;97m'
 green = '\033[1;92m'
 red = '\033[1;91m'
 yellow = '\033[1;93m'
 blue = '\033[1;94m'
+
 
 
 language = {
@@ -18,33 +18,35 @@ language = {
         'SEARCH_ITEM_BY_ID': 'PROCURAR ITEM POR ID',
         'HELP': 'AJUDA',
 
+        #HELP MENU
+        'HELP_MENU': 'MENU DE AJUDA',
+        'BLANK_ENTER': f'APERTE ENTER EM BRANCO PARA [red]VOLTAR[/]',
+        'AUTO_SAVING': f'OS DADOS SÃO [green3]SALVOS[/] AUTOMATICAMENTE',
+
+
         #ITEMS
         'ITEMS': 'ITENS',
         'NAME': 'NOME',
         'ITEM_CREATION': 'CRIAÇÃO DE ITEM',
-        'SUCCESSFUL_CREATION': f'{white}ITEM CRIADO COM [{green}SUCESSO{white}]',
-        'SUCCESSFUL_UPDATE': f'{white}ITEM ATUALIZADO COM [{green}SUCESSO{white}]',
+        'SUCCESSFUL_CREATION': f'ITEM CRIADO COM [[green3]SUCESSO[/]]]',
+        'SUCCESSFUL_UPDATE': f'ITEM ATUALIZADO COM [[green3]SUCESSO[/]]',
         'ITEM_EDITING': 'EDIÇÃO DE ITEM',
 
         #NAME
         'ITEM_NAME': 'NOME DO ITEM',
-        'NAME_SUCCESSFUL_CHANGE': f'{white}NOME ALTERADO COM [{green}SUCESSO{white}]',
-        'NEW_NAME': 'NOVO NOME (ENTER EM BRANCO PARA MANTER) ',
+        'NEW_NAME': 'NOVO NOME (ENTER EM BRANCO PARA MANTER)',
 
         #ID
         'ITEM_ID': 'ID DO ITEM',
-        'ID_SUCCESSFUL_CHANGE': f'{white}ID ALTERADO COM [{green}SUCESSO{white}]',
         'ID_EDITING': 'Digite o ID do item que deseja editar',
 
         #BATCH
         'ITEM_BATCH': 'LOTE DO ITEM',
-        'BATCH_SUCCESSFUL_CHANGE': f'{white}BATCH ALTERADO COM [{green}SUCESSO{white}]',
-        'NEW_BATCH': 'NOVO LOTE (ENTER EM BRANCO PARA MANTER) ',
+        'NEW_BATCH': 'NOVO LOTE (ENTER EM BRANCO PARA MANTER)',
 
         #STATUS
         'ITEM_STATUS': 'STATUS DO ITEM',
-        'STATUS_SUCCESSFUL_CHANGE': f'{white}STATUS ALTERADO COM [{green}SUCESSO{white}]',
-        'NEW_STATUS': 'NOVO STATUS (ENTER EM BRANCO PARA MANTER) ',
+        'NEW_STATUS': 'NOVO STATUS (ENTER EM BRANCO PARA MANTER)',
 
 
         'AVAILABLE': 'DISPONÍVEL',
@@ -53,11 +55,11 @@ language = {
 
 
         #ERRORS
-        'ITEM_NOT_FOUND': f'{white}[{red}ERRO{white}] ITEM NÃO ENCONTRADO',
-        'INVALID_OPTION': f'{white}[{red}ERRO{white}] OPÇÃO INVÁLIDA',
-        'INVALID_NUMBER': f'{white}[{red}ERRO{white}] NÚMERO INVÁLIDO',
-        'INVALID_STATUS': f'{white}[{red}ERRO{white}] STATUS INVÁLIDO',
-        'ALL_STATUS': f'{white}STATUS SELECIONÁVEIS: \n\n{green}DISPONÍVEL\033[1;97m\n{red}BLOQUEADO\033[1;97m\n{yellow}HOLD\033[1;97m\n{blue}CONFERÊNCIA{white}',
-        'NO_REGISTERED_ITEM': f'{white}[{red}ERRO{white}] NENHUM ITEM CADASTRADO',
+        'ITEM_NOT_FOUND': f'[[red]ERRO[/]] ITEM NÃO ENCONTRADO',
+        'INVALID_OPTION': f'[[red]ERRO[/]] OPÇÃO INVÁLIDA',
+        'INVALID_NUMBER': f'[[red]ERRO[/]] NÚMERO INVÁLIDO',
+        'INVALID_STATUS': f'[[red]ERRO[/]] STATUS INVÁLIDO',
+        'ALL_STATUS': f'\nSTATUS SELECIONÁVEIS: \n\n[green3]DISPONÍVEL[/]\n[red]BLOQUEADO[/]\n[yellow3]HOLD[/]\n[blue]CONFERÊNCIA[/]',
+        'NO_REGISTERED_ITEM': f'\n[[red]ERRO[/]] NENHUM ITEM CADASTRADO\n',
     }
 }
