@@ -31,7 +31,6 @@ def item_creation(lang, item):
         print(Panel.fit(language[lang]['ITEM_CREATION']))
 
         item_name = input(f'\n{language[lang]['ITEM_NAME']}: ').strip().title()
-        print()
 
         if item_name == '':
             break
@@ -39,11 +38,11 @@ def item_creation(lang, item):
         short_id = uuid.uuid4().hex
 
         item_batch = input(f'{language[lang]['ITEM_BATCH']}: ')
+
         if item_batch == '':
             break
 
         while True:
-
             item_status = input(f'{language[lang]['ITEM_STATUS']}: ')
             corrected_status = corrigir_texto(item_status)
 
@@ -70,7 +69,6 @@ def item_creation(lang, item):
         )
 
         insert_item(new_item)
-
 
 
 def item_listing(lang):
@@ -155,7 +153,7 @@ def item_editing(lang, item):
             current_item.batch = new_batch.upper()
 
         while True:
-            new_status = input(f'\n{language[lang]["NEW_STATUS"]}: ').strip()
+            new_status = input(f'{language[lang]["NEW_STATUS"]}: ').strip()
             print()
 
             if new_status:

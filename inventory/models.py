@@ -1,6 +1,5 @@
 from inventory.language import language
 from inventory.functions import corrigir_texto
-from rich import print
 
 
 

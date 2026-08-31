@@ -15,8 +15,13 @@ language = {
         'CREATE_ITEM': 'CRIAR ITEM',
         'EDIT_ITEM': 'EDITAR ITEM',
         'LIST_ITEMS': 'LISTAR ITENS',
+        'LANGUAGE_SELECTION': 'SELEÇÃO DE IDIOMA',
+        'LANGUAGE_SELECTION_MENU': 'MENU DE SELEÇÃO DE IDIOMA',
         'SEARCH_ITEM_BY_ID': 'PROCURAR ITEM POR ID',
         'HELP': 'AJUDA',
+        #LANGUAGE
+        'PORTUGUESE': '[green3]POR[/][blue]TU[/][yellow3]GUÊS[/]',
+        'ENGLISH': '[blue]ING[/][bright_white]LÊS[/]',
 
         #HELP MENU
         'HELP_MENU': 'MENU DE AJUDA',
